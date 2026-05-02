@@ -198,6 +198,7 @@ in
     shfmt
     zoxide
     wineWowPackages.stable
+    r2modman
 
     libreoffice
     blender
@@ -205,10 +206,12 @@ in
     myVim
     discord
     unityhub
+
   ];
 
   environment.shellAliases={
     steamapps = "cd ~/.local/share/Steam/steamapps/common";
+    bye = "shutdown now";
   };
 
   # Default editor
