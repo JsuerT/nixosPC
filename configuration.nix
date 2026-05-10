@@ -199,6 +199,7 @@ in
     zoxide
     wineWowPackages.stable
     r2modman
+    htop
 
     libreoffice
     blender
