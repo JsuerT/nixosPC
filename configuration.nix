@@ -1,14 +1,6 @@
-{  config, pkgs, ... }:
+{ config, pkgs, ... }:
 
 let
-  homeManagerTarball = builtins.fetchTarball {
-    url = "https://github.com/nix-community/home-manager/archive/master.tar.gz";
-  };
-
-  plasmaManagerTarball = builtins.fetchTarball {
-    url = "https://github.com/nix-community/plasma-manager/archive/trunk.tar.gz";
-  };
-
   myVim = pkgs.vim-full.customize {
     name = "vim";
     vimrcConfig.packages.myVimPackage = {
@@ -28,7 +20,6 @@ let
         vim-colors-solarized
       ];
     };
-
     vimrcConfig.customRC = ''
       syntax on
       set number
@@ -73,7 +64,6 @@ in
 {
   imports = [
     ./hardware-configuration.nix
-    "${homeManagerTarball}/nixos"
   ];
 
   # Bootloader
@@ -129,12 +119,11 @@ in
   #bluetooth 
   hardware.bluetooth.enable = true; 
   hardware.bluetooth.powerOnBoot = true; 
-  services.blueman.enable = true; 
+  services.blueman.enable = true;
 
   # Touchpad / input
   services.libinput.enable = true;
 
-  
   # Fonts
   fonts.packages = with pkgs; [
     jetbrains-mono
@@ -148,7 +137,8 @@ in
   users.users.ticco = {
     isNormalUser = true;
     description = "ticco";
-    extraGroups = [ "networkmanager" "wheel" "audio" "video" ];
+    # Hinweis: Falls ADB weiterhin "no permissions" zeigt, füge hier noch "adbusers" hinzu.
+    extraGroups = [ "networkmanager" "wheel" "audio" "video" ]; 
     packages = with pkgs; [ ];
   };
 
@@ -157,13 +147,13 @@ in
   programs.nm-applet.enable = true;
   programs.mtr.enable = true;
   programs.gamescope.enable = true; 
+  programs.adb.enable = true;
 
-  
   # --- NEU: Steam Aktivierung ---
   programs.steam = {
     enable = true;
-    remotePlay.openFirewall = true; # Port für Steam Remote Play
-    dedicatedServer.openFirewall = true; # Port für Source Dedicated Server
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true; 
   };
 
   # Unfree packages
@@ -192,11 +182,13 @@ in
     mariadb
     openjdk21
     openjdk17
+    android-tools
     nodePackages.prettier
     python3Packages.black
     clang-tools
     shfmt
     zoxide
+    
     wineWowPackages.stable
     r2modman
     htop
@@ -207,7 +199,6 @@ in
     myVim
     discord
     unityhub
-
   ];
 
   environment.shellAliases={
@@ -219,34 +210,6 @@ in
   environment.variables = {
     EDITOR = "vim";
     VISUAL = "vim";
-  };
-
-  # Home Manager
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-
-  home-manager.users.ticco = { ... }: {
-    imports = [
-      "${plasmaManagerTarball}/modules"
-    ];
-
-    programs.plasma = {
-      enable = true;
-      shortcuts = {
-        "kwin" = {
-          "Switch to Desktop 1" = "Meta+1";
-          "Switch to Desktop 2" = "Meta+2";
-          "Switch to Desktop 3" = "Meta+3";
-          "Window Maximize" = "Meta+Up";
-        };
-
-        "services/org.kde.konsole.desktop" = {
-          "_launch" = "Meta+Return";
-        };
-      };
-    };
-
-    home.stateVersion = "24.11";
   };
 
   system.stateVersion = "24.11";
