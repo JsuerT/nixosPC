@@ -197,6 +197,7 @@ in
     blender
 
     myVim
+    spotify
     discord
     unityhub
   ];
