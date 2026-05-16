@@ -168,6 +168,7 @@ in
   # System packages
   environment.systemPackages = with pkgs; [
     git
+    subversion
     curl
     wget
     htop
