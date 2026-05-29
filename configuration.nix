@@ -204,10 +204,10 @@ in
   ];
 
   environment.shellAliases={
-    steamapps = "cd ~/.local/share/Steam/steamapps/common";
     bye = "shutdown now";
-    ergo="cd /run/media/ticco/INTENSO/SchuleErgo";
-    info="cd /run/media/ticco/INTENSO/Info";
+    steamapps = "cd ~/.local/share/Steam/steamapps/common";
+    Ergo="cd /run/media/ticco/INTENSO/SchuleErgo";
+    Info="cd /run/media/ticco/INTENSO/Info";
   };
 
   # Default editor
