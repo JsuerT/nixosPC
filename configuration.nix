@@ -206,6 +206,8 @@ in
   environment.shellAliases={
     steamapps = "cd ~/.local/share/Steam/steamapps/common";
     bye = "shutdown now";
+    ergo="cd /run/media/ticco/INTENSO/SchuleErgo";
+    info="cd /run/media/ticco/INTENSO/Info";
   };
 
   # Default editor
