@@ -206,6 +206,14 @@ in
   environment.shellAliases={
     bye = "shutdown now";
     steamapps = "cd ~/.local/share/Steam/steamapps/common";
+  list = ''
+    for c in $(ls | cut -c1 | sort -u); do
+      echo "$c"
+      ls | grep "^$c" | sed 's/^/├── /'
+      echo
+    done
+  '';
+
     Ergo="cd /run/media/ticco/INTENSO/SchuleErgo";
     Info="cd /run/media/ticco/INTENSO/Info";
   };
