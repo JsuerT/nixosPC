@@ -59,16 +59,47 @@ let
       " Autoformat
       nnoremap <F3> :Autoformat<CR>
 
-      "" alles für die leiste oben 
-      " Fixierte obere Leiste aktivieren
+"" --- ALLES FÜR DIE INHALTSVERZEICHNIS-LEISTE ---
       set showtabline=2
 
-      " Standard-Text, falls noch kein Kapitel gesetzt wurde
+      " Globale Variablen für den Kasten und das Ticker-Scrolling
       let g:kasten_default = "Kein Inhaltsverzeichnis"
+      let b:kasten_scroll_offset = 0
 
-      " Funktion, die den Text für die obere Leiste holt
+      " Funktion, die den sichtbaren Ausschnitt für die Leiste berechnet
       function! AktuellerKastenText()
-        return get(b:, "mein_kasten_text", g:kasten_default)
+        let l:text = get(b:, "mein_kasten_text", g:kasten_default)
+        if !exists("b:kasten_scroll_offset") | let b:kasten_scroll_offset = 0 | endif
+        
+        " Wenn der Text kurz genug ist, zeige ihn einfach komplett
+        if strlen(l:text) <= 100
+          return l:text
+        endif
+
+        " Berechne das sichtbare Fenster (max. 100 Zeichen breit)
+        let l:sichtbar = strpart(l:text, b:kasten_scroll_offset, 100)
+        
+        " Visuelle Indikatoren (+ / -), ob links oder rechts noch Text kommt
+        let l:prefix = b:kasten_scroll_offset > 0 ? "< " : ""
+        let l:suffix = (b:kasten_scroll_offset + 100) < strlen(l:text) ? " >" : ""
+        
+        return l:prefix . l:sichtbar . l:suffix
+      endfunction
+
+      " Funktionen zum Scrollen des Inhaltsverzeichnisses
+      function! KastenScrollRechts()
+        let l:text = get(b:, "mein_kasten_text", g:kasten_default)
+        if b:kasten_scroll_offset + 100 < strlen(l:text)
+          let b:kasten_scroll_offset += 10
+          redrawtabline
+        endif
+      endfunction
+
+      function! KastenScrollLinks()
+        if b:kasten_scroll_offset > 0
+          let b:kasten_scroll_offset = max([0, b:kasten_scroll_offset - 10])
+          redrawtabline
+        endif
       endfunction
 
       " Funktion zum Hinzufügen von Kapiteln
@@ -78,16 +109,19 @@ let
         else
           let b:mein_kasten_text = b:mein_kasten_text . " | " . a:neuer_text
         endif
+        let b:kasten_scroll_offset = 0 " Reset Scroll bei neuem Eintrag
         redrawtabline
       endfunction
 
       " Befehle für den User
       command! -nargs=+ Kasten call KastenHinzufuegen(<q-args>)
-      command! KastenReset unlet! b:mein_kasten_text | redrawtabline
+      command! KastenReset unlet! b:mein_kasten_text | let b:kasten_scroll_offset = 0 | redrawtabline
+
+      " Hotkeys zum bequemen Scrollen der oberen Leiste im Normal-Mode
+      nnoremap + :call KastenScrollRechts()<CR>
+      nnoremap - :call KastenScrollLinks()<CR>
 
       " --- AUTOMATISCHES SPEICHERN & LADEN ---
-
-      " 1. Beim Öffnen einer Datei: Suche nach dem gespeicherten Inhaltsverzeichnis in den letzten 5 Zeilen
       autocmd BufReadPost * call KastenLaden()
       function! KastenLaden()
         let l:letzte_zeilen = getline(max([1, line("$")-4]), line("$"))
@@ -95,23 +129,20 @@ let
           let l:match = matchlist(l:zeile, "VIM_KASTEN:\\s*\\(.*\\)")
           if !empty(l:match) && !empty(l:match[1])
             let b:mein_kasten_text = l:match[1]
+            let b:kasten_scroll_offset = 0
             redrawtabline
             break
           endif
         endfor
       endfunction
 
-      " 2. Beim Speichern der Datei: Aktualisiere oder hänge die Zeile ganz unten an
       autocmd BufWritePre * call KastenSpeichern()
       function! KastenSpeichern()
         if exists("b:mein_kasten_text") && b:mein_kasten_text != g:kasten_default
-          " Bestimme das Kommentarzeichen je nach Dateityp
           let l:comment = substitute(&commentstring, "%s", "", "")
           if empty(l:comment) | let l:comment = "# " | endif
-          
           let l:neue_speicherzeile = trim(l:comment) . " VIM_KASTEN: " . b:mein_kasten_text
           
-          " Prüfen, ob schon ein Eintrag in den letzten 3 Zeilen existiert
           let l:line_num = line("$")
           while l:line_num > max([1, line("$")-3])
             if getline(l:line_num) =~ "VIM_KASTEN:"
@@ -120,13 +151,11 @@ let
             endif
             let l:line_num -= 1
           endwhile
-          
-          " Falls kein Eintrag existiert, füge ihn ganz unten hinzu
           call append(line("$"), l:neue_speicherzeile)
         endif
       endfunction
 
-      " Das Layout der oberen Leiste
+      " Das saubere, einzeilige Layout (ohne Steuerzeichen-Fehler)
       set tabline=%#Visual#\ \|\ Inhaltsverzeichnis:\ %{AktuellerKastenText()}\ \|\ 
     '';
   };
