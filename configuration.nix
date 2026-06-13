@@ -127,7 +127,7 @@ let
       endfunction
 
       " Das Layout der oberen Leiste
-      set tabline=%#Visual#\ ---------------\n\|\ Inhaltsverzeichnis:\ %{AktuellerKastenText()}\ \|\ \n-----------------
+      set tabline=%#Visual#\ \|\ Inhaltsverzeichnis:\ %{AktuellerKastenText()}\ \|\ 
     '';
   };
 in
