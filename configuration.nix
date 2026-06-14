@@ -169,8 +169,11 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  #Kernel wechseln
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   # Kernel-Fix gegen die Bluetooth-Abstürze
-  boot.kernelParams = [ "usbcore.autosuspend=-1" ];
+#  boot.kernelParams = [ "usbcore.autosuspend=-1" ];
 
   # Hostname and networking
   networking.hostName = "nixos";
@@ -219,19 +222,26 @@ in
   };
 
   services.udev.extraRules = ''
-    ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="*", ATTR{idProduct}=="*", ATTR{product}=="*Bluetooth*", ATTR{power/control}="on"
-    ACTION=="add", SUBSYSTEM=="usb", DRIVER=="btusb", ATTR{power/control}="on"
   '';   
+
+# 1. Erlaube und erzwinge die aktuellste redistribution-Firmware
+  hardware.enableRedistributableFirmware = true;
+
+  # 2. Treiber-Optionen für den MediaTek-Bluetooth-Chip (btusb) setzen
+  boot.extraModprobeConfig = ''
+    options btusb enable_autosuspend=0
+  '';
 
   # Bluetooth & Blueman
   hardware.bluetooth = {
     enable = true;   
-    powerOnBoot = true;   
+    powerOnBoot = true;
     settings = {
       General = {
-        ControllerMode = "dual";
-        FastConnectable = true;
+        # Experimental aktiviert oft wichtige Codecs (AAC/LDAC) für Kopfhörer
         Experimental = true;
+        # Aktiviert das automatische Umschalten auf die richtige Audio-Quelle
+        Enables = "Source,Sink,Media,Socket";
       };
     };
   };
