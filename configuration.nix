@@ -316,6 +316,7 @@ in
     zoxide
       
     wineWowPackages.stable
+    wine
     r2modman
 
     libreoffice
