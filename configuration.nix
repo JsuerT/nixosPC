@@ -52,6 +52,10 @@ let
       " NERDTree
       nnoremap <C-n> :NERDTreeToggle<CR>
 
+      "strg backspace 
+      noremap! <C-H> <C-W>
+      noremap! <C-BS> <C-W>
+
       " File search
       nnoremap <leader>ff :Files<CR>
       nnoremap <leader>fg :GFiles<CR>
@@ -172,9 +176,6 @@ in
   #Kernel wechseln
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  # Kernel-Fix gegen die Bluetooth-Abstürze
-#  boot.kernelParams = [ "usbcore.autosuspend=-1" ];
-
   # Hostname and networking
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
@@ -238,9 +239,7 @@ in
     powerOnBoot = true;
     settings = {
       General = {
-        # Experimental aktiviert oft wichtige Codecs (AAC/LDAC) für Kopfhörer
         Experimental = true;
-        # Aktiviert das automatische Umschalten auf die richtige Audio-Quelle
         Enables = "Source,Sink,Media,Socket";
       };
     };
@@ -273,6 +272,11 @@ in
   programs.mtr.enable = true;
   programs.gamescope.enable = true;  
   programs.adb.enable = true;
+
+  #VM 
+  virtualisation.libvirtd.enable = true; 
+  programs.virt-manager.enable = true; 
+  services.spice-vdagentd.enable = true; 
 
   # Steam Aktivierung
   programs.steam = {
@@ -340,6 +344,7 @@ in
     '';
     Ergo = "cd /run/media/ticco/INTENSO/SchuleErgo";
     Info = "cd /run/media/ticco/INTENSO/StudiumIT";
+    rmdown = "rm -rf ~/Downloads&& mkdir Downloads";
   };
 
   # Default editor
