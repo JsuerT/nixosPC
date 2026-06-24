@@ -76,4 +76,34 @@ config.enable_tab_bar = true
 config.use_fancy_tab_bar = false 
 config.tab_bar_at_bottom = false 
 
+
+--shortcuts 
+config.keys = {
+  --neuertab
+  {
+    key = 't',
+    mods = 'CTRL',
+    action = wezterm.action.SpawnTab 'CurrentPaneDomain',
+  },
+
+  --schließen tab
+  {
+    key = 'w',
+    mods = 'CTRL',
+    action = wezterm.action.CloseCurrentTab { confirm = false },
+  },
+
+  --move
+  {
+    key = 'Tab',
+    mods = 'CTRL',
+    action = wezterm.action.ActivateTabRelative(1),
+  },
+  {
+    key = 'Tab',
+    mods = 'CTRL|SHIFT',
+    action = wezterm.action.ActivateTabRelative(-1),
+  },
+}
+
 return config
