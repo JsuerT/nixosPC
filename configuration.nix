@@ -296,6 +296,7 @@ in
 
   # System packages
   environment.systemPackages = with pkgs; [
+    wezterm
     git
     subversion
     curl
@@ -331,6 +332,7 @@ in
     discord
     unityhub
   ];
+  environment.etc."xdg/wezterm/wezterm.lua".source = ./wezterm.lua; 
 
   environment.shellAliases = {
     bye = "shutdown now";
