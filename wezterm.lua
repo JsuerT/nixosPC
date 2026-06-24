@@ -11,6 +11,14 @@ config.window_decorations = "RESIZE"
 -- config.window_background_opacity = 0.88
 config.scrollback_lines = 5000
 
+--padding
+config.window_padding = {
+  left = 15, 
+  right = 15, 
+  top = 15, 
+  bottom = 30,
+}
+
 -- SILBER-LILA FARBSCHEMA ---
 config.colors = {
   background = '#1e1d2f', 
