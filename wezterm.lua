@@ -2,6 +2,10 @@
 local wezterm = require 'wezterm'
 local config = wezterm.config_builder()
 
+-- größe von dem startfenster 
+config.initial_cols = 120 
+config.initial_rows = 35
+
 -- --- Schriftart ---
 config.font = wezterm.font('JetBrains Mono')
 config.font_size = 11.0
