@@ -163,6 +163,8 @@ in
     wine
     r2modman
 
+    tty-clock
+    termdown
     libreoffice
     blender
 
