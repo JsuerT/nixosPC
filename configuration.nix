@@ -123,6 +123,7 @@ in
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
   };
+  hardware.steam-hardware.enable = true; 
 
   # Unfree packages
   nixpkgs.config.allowUnfree = true;
