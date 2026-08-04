@@ -148,6 +148,7 @@ in
     fd
     unzip
     zip
+    usbutils
 
     dotnet-sdk_8
     mariadb
