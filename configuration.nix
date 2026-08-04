@@ -116,6 +116,7 @@ in
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
   services.spice-vdagentd.enable = true;
+  virtualisation.libvirtd.qemu.vhostUserPackages = [ pkgs.virtiofsd ]; 
 
   # Steam Aktivierung
   programs.steam = {
