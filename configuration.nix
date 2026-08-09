@@ -101,7 +101,7 @@ in
   users.users.ticco = {
     isNormalUser = true;
     description = "ticco";
-    extraGroups = [ "networkmanager" "wheel" "audio" "video" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" "video" "input"];
     packages = with pkgs; [ ];
   };
 
@@ -125,6 +125,10 @@ in
     dedicatedServer.openFirewall = true;
   };
   hardware.steam-hardware.enable = true; 
+  services.joycond.enable = true; 
+  services.udev.packages = with pkgs; [
+    game-devices-udev-rules
+  ]; 
 
   # Unfree packages
   nixpkgs.config.allowUnfree = true;
