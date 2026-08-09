@@ -139,6 +139,12 @@ in
     package = pkgs.mariadb;
   };
 
+#openrgb 
+#services.hardware.openrgb = {
+#    enable = true;
+#    package = pkgs.openrgb-with-all-plugins; # Optional mit Extra-Plugins
+#  };
+
   # System packages
   environment.systemPackages = with pkgs; [
     wezterm
