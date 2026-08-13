@@ -112,6 +112,23 @@ in
   programs.gamescope.enable = true;
   programs.adb.enable = true;
 
+  #keys
+  services.keyd = {
+    enable = true; 
+    keyboards = {
+      default = {
+        ids = ["*"]; 
+        settings = {
+          main = {
+            #bisher kein eintrag 
+          }; 
+        }; 
+      }; 
+    }; 
+  }; 
+
+
+
   #VM
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
