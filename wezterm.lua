@@ -22,69 +22,69 @@ config.window_padding = {
   bottom = 30,
 }
 
--- --- INTENSIVES PURPLE RAIN / DARK ROSA FARBSCHEMA ---
+-- --- DEEP NIGHT SKY / ELECTRIC BLUE FARBSCHEMA ---
 config.colors = {
-  background = '#1b0e1e',     -- Dunkler Pflaumen-Hintergrund
-  foreground = '#f2b4ce',     -- Hauptschrift: Klar wahrnehmbares Pastellrosa statt Weiß
+  background = '#0a1128',     -- Dunkles Nachtblau-Hintergrund
+  foreground = '#a9d6f5',     -- Hauptschrift: Klares Pastellblau
 
-  cursor_bg = '#f07db4',      -- Strahlendes Pink/Rosa für den Cursor
-  cursor_fg = '#1b0e1e',      
-  cursor_border = '#f07db4',
+  cursor_bg = '#2e9bf0',      -- Strahlendes Himmelblau für den Cursor
+  cursor_fg = '#0a1128',      
+  cursor_border = '#2e9bf0',
 
-  selection_bg = '#5c224a',   -- Kräftiges Beeren-Violett beim Markieren
-  selection_fg = '#ffd6e7',   
+  selection_bg = '#1c3f6e',   -- Kräftiges Dunkelblau beim Markieren
+  selection_fg = '#d6ecff',   
 
-  split = '#e85a9d',          -- Akzent-Rosa für Fenster-Splits
+  split = '#1f8fe0',          -- Akzent-Blau für Fenster-Splits
 
-  -- ANSI-Farben: Grün, Blau etc. durch Rosatöne ersetzt, 
-  -- damit auch Konsolen-Prompts und System-Logs rosa leuchten
+  -- ANSI-Farben: durch Blautöne ersetzt, 
+  -- damit auch Konsolen-Prompts und System-Logs blau leuchten
   ansi = {
-    '#1b0e1e', -- Black
-    '#f07db4', -- Red (Beeren-Pink)
-    '#e58cb3', -- Green -> Ersetzt durch Rose/Magenta (Prompt-Farbe!)
-    '#f7a3c7', -- Yellow -> Soft Pink
-    '#d670a6', -- Blue -> Altrosa
-    '#e85a9d', -- Magenta -> Kräftiges Pink
-    '#f2b4ce', -- Cyan -> Hellrosa
-    '#f7d6e4'  -- White -> Sehr helles Rosa
+    '#0a1128', -- Black
+    '#2e9bf0', -- Red -> Himmelblau
+    '#1a6fc4', -- Green -> Mittelblau
+    '#4db8ff', -- Yellow -> Helles Blau
+    '#0d3b73', -- Blue -> Marineblau
+    '#1f8fe0', -- Magenta -> Kräftiges Blau
+    '#a9d6f5', -- Cyan -> Hellblau
+    '#d6ecff'  -- White -> Sehr helles Blau
   },
   brights = {
-    '#3e203f', -- Bright Black
-    '#ff8dc3', -- Bright Red
-    '#fba2cd', -- Bright Green -> Hell-Pink
-    '#fbc4dd', -- Bright Yellow
-    '#e882ba', -- Bright Blue
-    '#ff6eb4', -- Bright Magenta
-    '#f2c2d7', -- Bright Cyan
+    '#1c3f6e', -- Bright Black
+    '#5ec2ff', -- Bright Red
+    '#3fa9f5', -- Bright Green
+    '#7dd0ff', -- Bright Yellow
+    '#2e78d6', -- Bright Blue
+    '#4fb0ff', -- Bright Magenta
+    '#c2e6ff', -- Bright Cyan
     '#ffffff'  -- Bright White
   },
 
   -- --- TAB-BAR STYLING ---
   tab_bar = {
-    background = '#130915',   -- Dunkler Ton für die Tab-Leiste
+    background = '#060b1a',   -- Dunkler Ton für die Tab-Leiste
 
     active_tab = {
-      bg_color = '#e85a9d',   -- Kräftiges Rosa für aktiven Tab
+      bg_color = '#1f8fe0',   -- Kräftiges Blau für aktiven Tab
       fg_color = '#ffffff',   
       intensity = 'Bold',
     },
 
     inactive_tab = {
-      bg_color = '#381c37',   -- Gedämpftes Dunkel-Violett für inaktive Tabs
-      fg_color = '#f2b4ce',   -- Rosa Schrift für inaktive Tabs
+      bg_color = '#122344',   -- Gedämpftes Dunkelblau für inaktive Tabs
+      fg_color = '#a9d6f5',   -- Blaue Schrift für inaktive Tabs
     },
 
     inactive_tab_hover = {
-      bg_color = '#f07db4',   -- Helleres Pink beim Drüberfahren
-      fg_color = '#1b0e1e',   
+      bg_color = '#2e9bf0',   -- Helleres Blau beim Drüberfahren
+      fg_color = '#0a1128',   
     },
 
     new_tab = {
-      bg_color = '#381c37',   
-      fg_color = '#f2b4ce',   
+      bg_color = '#122344',   
+      fg_color = '#a9d6f5',   
     },
     new_tab_hover = {
-      bg_color = '#e85a9d',   
+      bg_color = '#1f8fe0',   
       fg_color = '#ffffff',
     },
   },
