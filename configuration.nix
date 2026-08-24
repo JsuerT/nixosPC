@@ -189,6 +189,7 @@ in
     shfmt
     zoxide
 
+    prismlauncher
     wineWowPackages.stable
     wine
     r2modman
