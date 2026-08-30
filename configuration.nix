@@ -1,5 +1,4 @@
 { config, pkgs, ... }:
-
 let
   myVim = import ./vim.nix {inherit pkgs; };
 in
@@ -16,7 +15,7 @@ in
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Hostname and networking
-  networking.hostName = "nixos";
+  networking.hostName = "Mido";
   networking.networkmanager.enable = true;
 
   # Time and locale
@@ -156,6 +155,13 @@ in
     package = pkgs.mariadb;
   };
 
+  #java 
+  programs.java = {
+    enable = true; 
+    package = pkgs.openjdk25; 
+  }; 
+  environment.etc."jdks/openjdk25".source = pkgs.openjdk25; 
+
 #openrgb 
 #services.hardware.openrgb = {
 #    enable = true;
@@ -181,6 +187,7 @@ in
     dotnet-sdk_8
     mariadb
     openjdk21
+    openjdk25
     openjdk17
     android-tools
     nodePackages.prettier
