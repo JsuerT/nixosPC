@@ -64,6 +64,7 @@ pkgs.vim-full.customize {
 
       " nerdtree"
       autocmd VimEnter * NERDTree | wincmd p
+      autocmd BufEnter * if winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree() | quit | endif
 
 "" --- ALLES FÜR DIE INHALTSVERZEICHNIS-LEISTE ---
       set showtabline=2
