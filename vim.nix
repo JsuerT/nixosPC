@@ -1,28 +1,45 @@
 { pkgs }:
 
 pkgs.vim-full.customize {
-    name = "vim";
-    vimrcConfig.packages.myVimPackage = {
-      start = with pkgs.vimPlugins; [
-        vim-airline
-        vim-airline-themes
-        nerdtree
-        vim-fugitive
-        vim-gitgutter
-        vim-surround
-        vim-commentary
-        fzf-vim
-        vim-polyglot
-        indentLine
-        auto-pairs
-        vim-autoformat
-        vim-colors-solarized
-      ];
-    };
-    vimrcConfig.customRC = ''
+  name = "vim";
+  vimrcConfig.packages.myVimPackage = {
+    start = with pkgs.vimPlugins; [
+      vim-airline
+      vim-airline-themes
+      nerdtree
+      vim-fugitive
+      vim-gitgutter
+      vim-surround
+      vim-commentary
+      fzf-vim
+      vim-polyglot
+      indentLine
+      auto-pairs
+      vim-autoformat
+      vim-colors-solarized
+      coc-nvim
+    ];
+  };
+  vimrcConfig.customRC = ''
+
+
+    let g:clipboard = {
+      \   'name': 'wl-clipboard',
+      \   'copy': {
+      \      '+': 'wl-copy --foreground --type text/plain',
+      \      '*': 'wl-copy --foreground --primary --type text/plain',
+      \    },
+      \   'paste': {
+      \      '+': 'wl-paste --no-newline',
+      \      '*': 'wl-paste --no-newline --primary',
+      \    },
+      \   'cache_enabled': 0,
+      \ }
+
+
       syntax on
       set number
-      set relativenumber
+      set norelativenumber
       set termguicolors
       set encoding=utf-8
       set shiftwidth=2
@@ -62,11 +79,19 @@ pkgs.vim-full.customize {
       " Autoformat
       nnoremap <F3> :Autoformat<CR>
 
-      " nerdtree"
+      "Autocompletion CoC
+       inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
+    inoremap <silent><expr> <S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+    inoremap <silent><expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+
+      nerdtree"
       autocmd VimEnter * NERDTree | wincmd p
       autocmd BufEnter * if winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree() | quit | endif
 
-"" --- ALLES FÜR DIE INHALTSVERZEICHNIS-LEISTE ---
+
+
+
+    "" --- ALLES FÜR DIE INHALTSVERZEICHNIS-LEISTE ---
       set showtabline=2
 
       " Globale Variablen für den Kasten und das Ticker-Scrolling
@@ -166,5 +191,5 @@ pkgs.vim-full.customize {
       set tabline=%#Visual#\ \|\ Inhaltsverzeichnis:\ %{AktuellerKastenText()}\ \|\
 
 
-    '';
-  }
+  '';
+}
