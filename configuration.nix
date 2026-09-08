@@ -182,6 +182,7 @@ in
     fd
     unzip
     zip
+    wl-clipboard
     usbutils
 
     dotnet-sdk_8
