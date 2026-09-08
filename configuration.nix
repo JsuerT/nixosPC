@@ -13,6 +13,9 @@ in
 
   #Kernel wechseln
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelParams = [
+    "usbcore.autosuspend=-1"
+  ]; 
 
   # Hostname and networking
   networking.hostName = "Mido";
