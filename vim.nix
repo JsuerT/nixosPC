@@ -21,7 +21,8 @@ pkgs.vim-full.customize {
     ];
   };
   vimrcConfig.customRC = ''
-
+    " CoC Node.js Pfad explizit über Nix definieren
+    let g:coc_node_path = '${pkgs.nodejs}/bin/node'
 
     let g:clipboard = {
       \   'name': 'wl-clipboard',
@@ -35,7 +36,6 @@ pkgs.vim-full.customize {
       \    },
       \   'cache_enabled': 0,
       \ }
-
 
       syntax on
       set number
@@ -65,10 +65,10 @@ pkgs.vim-full.customize {
       " Leader
       let mapleader = " "
 
-      " NERDTree
+      " NERDTree Mappings
       nnoremap <C-n> :NERDTreeToggle<CR>
 
-      "strg backspace
+      " Strg Backspace
       noremap! <C-H> <C-W>
       noremap! <C-BS> <C-W>
 
@@ -79,19 +79,16 @@ pkgs.vim-full.customize {
       " Autoformat
       nnoremap <F3> :Autoformat<CR>
 
-      "Autocompletion CoC
-       inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
-    inoremap <silent><expr> <S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-    inoremap <silent><expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+      " Autocompletion CoC
+      inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
+      inoremap <silent><expr> <S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+      inoremap <silent><expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
-      nerdtree"
+      " NERDTree Autocommands (Fehler korrigiert)
       autocmd VimEnter * NERDTree | wincmd p
       autocmd BufEnter * if winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree() | quit | endif
 
-
-
-
-    "" --- ALLES FÜR DIE INHALTSVERZEICHNIS-LEISTE ---
+      " --- ALLES FÜR DIE INHALTSVERZEICHNIS-LEISTE ---
       set showtabline=2
 
       " Globale Variablen für den Kasten und das Ticker-Scrolling
@@ -103,15 +100,11 @@ pkgs.vim-full.customize {
         let l:text = get(b:, "mein_kasten_text", g:kasten_default)
         if !exists("b:kasten_scroll_offset") | let b:kasten_scroll_offset = 0 | endif
 
-        " Wenn der Text kurz genug ist, zeige ihn einfach komplett
         if strlen(l:text) <= 100
           return l:text
         endif
 
-        " Berechne das sichtbare Fenster (max. 100 Zeichen breit)
         let l:sichtbar = strpart(l:text, b:kasten_scroll_offset, 100)
-
-        " Visuelle Indikatoren (+ / -), ob links oder rechts noch Text kommt
         let l:prefix = b:kasten_scroll_offset > 0 ? "< " : ""
         let l:suffix = (b:kasten_scroll_offset + 100) < strlen(l:text) ? " >" : ""
 
@@ -141,7 +134,7 @@ pkgs.vim-full.customize {
         else
           let b:mein_kasten_text = b:mein_kasten_text . " | " . a:neuer_text
         endif
-        let b:kasten_scroll_offset = 0 " Reset Scroll bei neuem Eintrag
+        let b:kasten_scroll_offset = 0
         redrawtabline
       endfunction
 
@@ -187,9 +180,7 @@ pkgs.vim-full.customize {
         endif
       endfunction
 
-      " Das saubere, einzeilige Layout (ohne Steuerzeichen-Fehler)
+      " Das saubere, einzeilige Layout
       set tabline=%#Visual#\ \|\ Inhaltsverzeichnis:\ %{AktuellerKastenText()}\ \|\
-
-
   '';
 }
