@@ -1,0 +1,58 @@
+================================================================================
+                    VIM CONFIGURATION SHORTCUT CHEATSHEET
+================================================================================
+
+1. NAVIGATION & WERKZEUGE (TOOLS)
+--------------------------------------------------------------------------------
+  Ctrl + n       : NERDTree (Dateibaum) umschalten
+  F8             : Tagbar (Klassen- & Methodenstruktur / Outline) umschalten
+  F12            : Floating Terminal öffnen & verbergen
+
+
+2. SUCHE (FZF & RIPGREP)
+--------------------------------------------------------------------------------
+  <Space> ff     : Alle Dateien im Projekt durchsuchen
+  <Space> fg     : Nur Git-getrackte Dateien durchsuchen
+  <Space> fw     : Text im gesamten Projekt suchen (benötigt ripgrep)
+  <Space> fc     : Aktuelles Wort unter dem Cursor im Projekt suchen
+
+
+3. LSP & CODE-INTELLIGENZ (COC.NVIM)
+--------------------------------------------------------------------------------
+  Tab            : [Insert Mode] Nächsten Autocomplete-Vorschlag wählen
+  Shift + Tab    : [Insert Mode] Vorherigen Autocomplete-Vorschlag wählen
+  Enter          : [Insert Mode] Autocomplete-Vorschlag übernehmen
+  gd             : Gehe zur Definition (Go to Definition)
+  gy             : Gehe zur Typ-Definition (Type Definition)
+  gi             : Gehe zur Implementierung (Implementation)
+  gr             : Zeige alle Referenzen (References)
+  K              : Hover-Dokumentation & Typ-Details anzeigen
+  <Space> rn     : Symbol / Variable projektweit umbenennen (Rename)
+  <Space> ca     : Code Action / Quick-Fix ausführen
+  [g             : Zum vorherigen Fehler / Warning springen
+  ]g             : Zum nächsten Fehler / Warning springen
+  <Space> cd     : Übersicht aller Fehler im Projekt öffnen (Diagnostics)
+  <Space> co     : CoC-Strukturübersicht (Outline) öffnen
+
+
+4. EDITIEREN & FORMATIEREN
+--------------------------------------------------------------------------------
+  F3             : Code automatisch formatieren (Autoformat)
+  Ctrl + BS      : [Insert / Cmd Mode] Wort nach links löschen
+
+
+5. GIT INTEGRATION (FUGITIVE)
+--------------------------------------------------------------------------------
+  <Space> gs     : Git Status Übersicht öffnen
+  <Space> gb     : Git Blame für Zeilen anzeigen
+  <Space> gd     : Git Diff Split-Ansicht öffnen
+  <Space> gl     : Git Commit Log anzeigen
+
+
+6. CUSTOM TABLINE (INHALTSVERZEICHNIS)
+--------------------------------------------------------------------------------
+  +              : Inhaltsverzeichnis nach rechts scrollen
+  -              : Inhaltsverzeichnis nach links scrollen
+  :Kasten <text> : [Command Mode] Eintrag/Kapitel zum Inhaltsverzeichnis hinzufügen
+  :KastenReset   : [Command Mode] Inhaltsverzeichnis zurücksetzen
+================================================================================
