@@ -12,7 +12,8 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
 
   #Kernel wechseln
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  #boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages;
   boot.kernelParams = [
     "usbcore.autosuspend=-1"
   ]; 
@@ -35,6 +36,22 @@ in
     LC_PAPER = "de_DE.UTF-8";
     LC_TELEPHONE = "de_DE.UTF-8";
     LC_TIME = "de_DE.UTF-8";
+  };
+
+    # Grafik-Treiber
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;   # wichtig für Proton/Wine (Steam-Spiele sind oft 32-bit)
+  };
+
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    open = true;      
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
   # Graphical desktop
@@ -230,6 +247,7 @@ in
     Ergo = "udisksctl mount -b /dev/disk/by-label/INTENSO 2>/dev/null; cd /run/media/ticco/INTENSO/SchuleErgo";
     Info = "udisksctl mount -b /dev/disk/by-label/INTENSO 2>/dev/null; cd /run/media/ticco/INTENSO/StudiumIT";
     rmdown = "rm -rf ~/Downloads&& mkdir Downloads";
+    code = "cd ~/Codes/SecurityDashboard/src && vim Main.java"; 
   };
 
   # Default editor
